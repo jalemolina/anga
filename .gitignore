@@ -1,0 +1,14 @@
+node_modules
+dist
+.tmp
+.sass-cache
+bower_components
+
+########################### Global VIM
+
+.*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
