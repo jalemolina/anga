@@ -380,6 +380,19 @@ module.exports = function (grunt) {
       ]
     },
 
+    pkg: grunt.file.readJSON('app/package.json'),
+        nodewebkit: {
+            options: {
+            build_dir: './dist',
+            // specifiy what to build
+            mac:  false ,
+            win:  true ,
+            linux32:  true ,
+            linux64:  true
+            },
+        src: './src/**/*'
+        },
+
     // Test settings
     karma: {
       unit: {
@@ -441,4 +454,8 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.loadNpmTasks('grunt-node-webkit-builder');
+     
+  grunt.registerTask('default', ['nodewebkit']);
 };

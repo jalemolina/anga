@@ -1,0 +1,11 @@
+{
+    "name": "anga",
+    "version": "0.0.1",
+    "main": "./index.html",
+    "window": {
+        "toolbar": true,
+        "frame": true,
+        "width": 800,
+        "height": 500
+    }
+}
