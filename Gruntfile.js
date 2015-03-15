@@ -383,14 +383,14 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('app/package.json'),
         nodewebkit: {
             options: {
-            build_dir: './dist',
-            // specifiy what to build
-            mac:  false ,
-            win:  true ,
-            linux32:  true ,
-            linux64:  true
+                build_dir: './dist/app',
+                // specifiy what to build
+                mac:  false ,
+                win:  true ,
+                linux32:  true ,
+                linux64:  true
             },
-        src: './src/**/*'
+        src: './app/**/*'
         },
 
     // Test settings
