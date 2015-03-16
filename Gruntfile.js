@@ -323,11 +323,11 @@ module.exports = function (grunt) {
     },
 
     // Replace Google CDN references
-    cdnify: {
-      dist: {
-        html: ['<%= yeoman.dist %>/*.html']
-      }
-    },
+    //cdnify: {
+      //dist: {
+        //html: ['<%= yeoman.dist %>/*.html']
+      //}
+    //},
 
     // Copies remaining files to places other tasks can use
     copy: {
@@ -341,6 +341,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
+            '*.json',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*'
@@ -383,14 +384,14 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('app/package.json'),
         nodewebkit: {
             options: {
-                build_dir: './dist/app',
+                build_dir: './dist-app',
                 // specifiy what to build
                 mac:  false ,
                 win:  true ,
                 linux32:  true ,
                 linux64:  true
             },
-        src: './app/**/*'
+        src: './dist/**/*'
         },
 
     // Test settings
@@ -434,6 +435,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    //'shell',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
@@ -441,12 +443,13 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
+    //'cdnify',
     'cssmin',
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'nodewebkit'
   ]);
 
   grunt.registerTask('default', [
@@ -455,7 +458,7 @@ module.exports = function (grunt) {
     'build'
   ]);
 
+  //grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-node-webkit-builder');
-     
-  grunt.registerTask('default', ['nodewebkit']);
+ 
 };
