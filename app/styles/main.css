@@ -81,3 +81,10 @@ body {
     border-bottom: 0;
   }
 }
+
+.context-btn {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
