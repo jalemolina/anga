@@ -88,3 +88,23 @@ body {
   bottom: 20px;
   right: 20px;
 }
+
+.offline-ui {
+  z-index: 100000;
+}
+
+#sync-container {
+  position: fixed;
+  bottom: -25px;
+  width: 350px;
+  left: 15px;
+  z-index: 100000;
+}
+
+div.pull-right > a {
+  font-size: 16pt;
+}
+
+i.numeros {
+  font-size: 40pt;
+}

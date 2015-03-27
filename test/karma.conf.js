@@ -31,7 +31,11 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/bootstrap-material-design/dist/js/material.js',
       'bower_components/bootstrap-material-design/dist/js/ripples.js',
+      'bower_components/lodash/lodash.js',
+      'bower_components/offline/offline.min.js',
+      'bower_components/angular-indexed-db/angular-indexed-db.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js',
       // endbower
       'app/scripts/**/*.js',
       'test/mock/**/*.js',

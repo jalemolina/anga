@@ -1,4 +1,4 @@
-<!doctype html>
+<doctype html>
 <html class="no-js">
   <head>
     <meta charset="utf-8">
@@ -17,6 +17,26 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/roboto.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="bower_components/offline/themes/offline-theme-slide.css" />
+    <link rel="stylesheet" href="bower_components/offline/themes/offline-language-spanish.css" />
+            <style>
+              #dropdown-menu h2 {
+                padding: 14px;
+                margin: 0;
+                font-size: 16px;
+                font-weight: 400;
+              }
+              #dropdown-menu .sample {
+                width: 200px;
+              }
+              #dropdown-menu .form-group {
+                margin: 30px 0;
+              }
+              .notif {
+                display: none;
+              }
+            </style>
+
     <!-- endbuild -->
   </head>
   <body ng-app="angaApp">
@@ -27,7 +47,6 @@
     <!-- Add your site or application content here -->
     <div class="header">
       <div class="navbar navbar-default" role="navigation">
-        <div class="container">
           <div class="navbar-header">
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
@@ -50,8 +69,23 @@
             <form class="navbar-form navbar-left">
             <input class="form-control col-lg-8" placeholder="Buscar" type="text">
         </form>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+            <i class="mdi-notification-sync mdi-material-light-green notif online"></i>
+            <i class="mdi-notification-sync mdi-material-red notif offline"></i>
+            </li>
+            <li class="dropdown">
+                <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="">Action</a></li>
+                    <li><a href="">Another action</a></li>
+                    <li><a href="">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">Separated link</a></li>
+                </ul>
+            </li>
+        </ul>
           </div>
-        </div>
       </div>
     </div>
 
@@ -90,13 +124,38 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/offline/offline.min.js"></script>
+    <script src="bower_components/angular-indexed-db/angular-indexed-db.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+    <!--<script src="bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js"></script>-->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <!-- endbuild -->
+<script>
+$(function(){
+  var
+    $online = $('.online'),
+    $offline = $('.offline');
+
+    Offline.on('confirmed-down', function() {
+      $online.fadeOut(function() {
+        $offline.fadeIn();
+      });
+    });
+
+    Offline.on('confirmed-up', function() {
+      $offline.fadeOut(function() {
+        $online.fadeIn();
+      });
+    });
+
+  Offline.check();
+});
+</script>
 </body>
 </html>
