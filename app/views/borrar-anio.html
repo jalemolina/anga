@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
+  <h4 class="modal-title">Borrar el curso</h4>
+  <br>
+  </div>
+<div class="modal-body">
+  <p>¿Confirma que desea borrar el {{bCurso.anio}}<sup ng-show="bCurso.anio == 1 || bCurso.anio == 3">er</sup><sup ng-show="bCurso.anio == 2">do</sup><sup ng-show="bCurso.anio == 4 || bCurso.anio == 5 || bCurso.anio == 6 || bCurso.anio == 7">to</sup> año y todas sus divisiones?</p>
+</div>
+<div class="modal-footer">
+  <br>
+  <button class="btn btn-default btn-raised" data-dismiss="modal" ng-click="cancel()">Cancelar</button>
+  <button class="btn btn-danger btn-raised" data-dismiss="modal" ng-click="borrarCurso()">Borrar</button>
+</div>

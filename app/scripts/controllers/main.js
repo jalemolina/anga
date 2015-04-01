@@ -39,7 +39,33 @@ angular.module('angaApp')
             var newPost = 'código para guardar en la db, ver que pasa con selectedItem: ';
             console.info(newPost, selectedItem);
             $indexedDB.openStore('curso', function(store) {
-              store.insert({"anio": selectedItem.anio, "divisiones": selectedItem.divisiones})
+              store.insert({'anio': selectedItem.anio, 'divisiones': selectedItem.divisiones})
+              .then(function(e){console.info(e)});
+              store.getAll().then(function(curso) {
+                $scope.cursos = curso;
+              });
+            });
+          });
+        };
+
+        $scope.showDeleteModal = function(id) {
+
+          $scope.idCurso = id;
+          var modalInstance = $modal.open({
+            templateUrl: 'views/borrar-anio.html',
+            controller: 'borrarAnioCtrl',
+            resolve: {
+              idCurso: function() {
+                return $scope.idCurso;
+              }
+            }
+          });
+
+          modalInstance.result.then(function(selectedItem) {
+            var newPost = 'código para borrar en la db, ver que pasa con selectedItem: ';
+            console.info(newPost, selectedItem);
+            $indexedDB.openStore('curso', function(store) {
+              store.delete(selectedItem)
               .then(function(e){console.info(e)});
               store.getAll().then(function(curso) {
                 $scope.cursos = curso;
@@ -65,6 +91,26 @@ angular.module('angaApp')
     $scope.agregarNuevoCurso = function() {
       $modalInstance.close(nuevoCurso);
     };
+    $scope.cancel = function() {
+      $modalInstance.dismiss('cancel');
+    };
+  })
+  .controller('borrarAnioCtrl', function ($scope, $modalInstance, idCurso, $indexedDB) {
+    $scope.idCurso = idCurso;
+
+    $indexedDB.openStore('curso', function(store) {
+      store.find(idCurso)
+      .then(function(e){$scope.bCurso = e;});
+    });
+
+    $scope.$watch('$viewContentLoaded', function(){
+      $.material.init();
+    });
+
+    $scope.borrarCurso = function() {
+      $modalInstance.close(idCurso);
+    };
+    
     $scope.cancel = function() {
       $modalInstance.dismiss('cancel');
     };
