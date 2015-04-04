@@ -37,6 +37,10 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
+      .when('/curso/:anio/:div', {
+        templateUrl: 'views/curso.html',
+        controller: 'CursoCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

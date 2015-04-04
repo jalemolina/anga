@@ -39,7 +39,7 @@ angular.module('angaApp')
             var newPost = 'código para guardar en la db, ver que pasa con selectedItem: ';
             console.info(newPost, selectedItem);
             $indexedDB.openStore('curso', function(store) {
-              store.insert({'anio': selectedItem.anio, 'divisiones': selectedItem.divisiones})
+              store.upsert({'anio': selectedItem.anio, 'divisiones': selectedItem.divisiones, 'id': ''})
               .then(function(e){console.info(e)});
               store.getAll().then(function(curso) {
                 $scope.cursos = curso;

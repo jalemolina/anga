@@ -4,37 +4,39 @@
   <br>
   </div>
 <div class="modal-body">
-  <div class="form-control-wrapper">
-    <input class="form-control empty" type="number" min="1" max="7" ng-model="nuevoCurso.anio">
-    <div class="floating-label">Año</div><span class="material-input"></span>
-    <div class="checkbox checkbox-inline">
-      <label>
-        <input type="checkbox" ng-model="nuevoCurso.divisiones.a"> A
-      </label>
-      <label>
-        <input type="checkbox" ng-model="nuevoCurso.divisiones.b"> B
-      </label>
-      <label>
-        <input type="checkbox" ng-model="nuevoCurso.divisiones.c"> C
-      </label>
-      <label>
-        <input type="checkbox" ng-model="nuevoCurso.divisiones.d"> D
-      </label>
-      <label>
-        <input type="checkbox" ng-model="nuevoCurso.divisiones.e"> E
-      </label>
-      <label>
-        <input type="checkbox" ng-model="nuevoCurso.divisiones.f"> F
-      </label>
-      <label>
-        <input type="checkbox" ng-model="nuevoCurso.divisiones.g"> G
-      </label>
+  <form name="curso">
+    <div class="form-control-wrapper">
+      <input id="anioCursoForm" name="anioCursoForm" class="form-control empty" type="number" min="1" max="7" ng-model="nuevoCurso.anio" required>
+      <div class="floating-label">Año</div><span class="material-input"></span>
+      <div class="checkbox checkbox-inline">
+        <label>
+          <input type="checkbox" ng-model="nuevoCurso.divisiones.a"> A
+        </label>
+        <label>
+          <input type="checkbox" ng-model="nuevoCurso.divisiones.b"> B
+        </label>
+        <label>
+          <input type="checkbox" ng-model="nuevoCurso.divisiones.c"> C
+        </label>
+        <label>
+          <input type="checkbox" ng-model="nuevoCurso.divisiones.d"> D
+        </label>
+        <label>
+          <input type="checkbox" ng-model="nuevoCurso.divisiones.e"> E
+        </label>
+        <label>
+          <input type="checkbox" ng-model="nuevoCurso.divisiones.f"> F
+        </label>
+        <label>
+          <input type="checkbox" ng-model="nuevoCurso.divisiones.g"> G
+        </label>
+      </div>
     </div>
-  </div>
+  </form>
 
 </div>
 <div class="modal-footer">
   <br>
   <button class="btn btn-default btn-raised" data-dismiss="modal" ng-click="cancel()">Cancelar</button>
-  <button class="btn btn-primary btn-raised" data-dismiss="modal" ng-click="agregarNuevoCurso()">Agregar</button>
+  <button class="btn btn-primary btn-raised" data-dismiss="modal" ng-class="{ 'disabled' : curso.anioCursoForm.$invalid }" ng-click="agregarNuevoCurso()">Agregar</button>
 </div>

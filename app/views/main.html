@@ -3,15 +3,14 @@
     <div class="panel-body">
       <i class="mdi-image-filter-{{curso.anio}} mdi-material-pink numeros"></i>
         <div class="pull-right">
-          <a href="" class="btn btn-flat btn-primary btn-sm" ng-repeat="(dv, booleano) in curso.divisiones" ng-show="booleano">{{dv}}</a>
+          <a href="#/curso/{{curso.anio}}/{{dv}}" class="btn btn-flat btn-primary btn-sm" ng-repeat="(dv, booleano) in curso.divisiones" ng-show="booleano">{{dv}}</a>
             <a class="btn btn-flat btn-info btn-sm mdi-editor-mode-edit xxs" href=""></a>
             <a class="btn btn-flat btn-danger btn-sm mdi-action-delete xxs" href="" ng-click=showDeleteModal(curso.id)></a>
         </div>
     </div>
 </div>
-<div class="alert alert-dismissable alert-danger" ng-show="cursos == 0">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>No hay cursos.</strong> Puede agregarlos con el botón <button class="btn btn-fab btn-fab-mini btn-raised btn-sm btn-info"><i class="mdi-action-class"></i></button> en la esquina inferior derecha.
+<div class="alert alert-danger" ng-show="cursos == 0">
+    <strong>No hay cursos.</strong> Puede agregarlos con el botón <button class="btn btn-fab btn-fab-mini btn-raised btn-sm btn-info" ng-click="showModal()"><i class="mdi-action-class"></i></button> en la esquina inferior derecha.
 </div>
 
 <ul class="row">
