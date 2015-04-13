@@ -8,16 +8,19 @@
  * Controller of the angaApp
  */
 angular.module('angaApp')
-  .controller('MainCtrl', ['$scope', '$modal', '$indexedDB',
-    function ($scope, $modal, $indexedDB) {
+  .controller('MainCtrl', ['$scope', '$rootScope', '$modal', '$db', '$log',
+    function ($scope, $rootScope, $modal, $db, $log) {
         $scope.cursos = [];
 
-        $indexedDB.openStore('curso', function(store) {
-          store.getAll().then(function(curso) {  
-            // Update scope
-            $scope.cursos = curso;
+        var refresh = function() {
+          $db.getAllCursos()
+          .then(function(doc) {
+            $scope.cursos = doc;
           });
-        });
+        };
+        refresh();
+        $scope.$on("REFRESH", refresh);
+
         // agregar esto en cada controlador para que funcione material-design
         $scope.$watch('$viewContentLoaded', function(){
           $.material.init();
@@ -36,15 +39,12 @@ angular.module('angaApp')
           });
 
           modalInstance.result.then(function(selectedItem) {
-            var newPost = 'código para guardar en la db, ver que pasa con selectedItem: ';
-            console.info(newPost, selectedItem);
-            $indexedDB.openStore('curso', function(store) {
-              store.upsert({'anio': selectedItem.anio, 'divisiones': selectedItem.divisiones, 'id': ''})
-              .then(function(e){console.info(e)});
-              store.getAll().then(function(curso) {
-                $scope.cursos = curso;
-              });
-            });
+            var temp = {'anio': selectedItem.anio,
+                        'divisiones': selectedItem.divisiones
+            };
+            
+            $db.insertCurso(temp);
+            $scope.$broadcast("REFRESH");
           });
         };
 
@@ -62,14 +62,9 @@ angular.module('angaApp')
           });
 
           modalInstance.result.then(function(selectedItem) {
-            var newPost = 'código para borrar en la db, ver que pasa con selectedItem: ';
-            console.info(newPost, selectedItem);
-            $indexedDB.openStore('curso', function(store) {
-              store.delete(selectedItem)
-              .then(function(e){console.info(e)});
-              store.getAll().then(function(curso) {
-                $scope.cursos = curso;
-              })
+            $db.removeCurso(selectedItem)
+            .then(function() {
+              $scope.$broadcast("REFRESH");
             });
           });
         };
@@ -95,12 +90,12 @@ angular.module('angaApp')
       $modalInstance.dismiss('cancel');
     };
   })
-  .controller('borrarAnioCtrl', function ($scope, $modalInstance, idCurso, $indexedDB) {
+  .controller('borrarAnioCtrl', function ($scope, $modalInstance, idCurso, $db, $log) {
     $scope.idCurso = idCurso;
 
-    $indexedDB.openStore('curso', function(store) {
-      store.find(idCurso)
-      .then(function(e){$scope.bCurso = e;});
+    $db.getCurso(idCurso)
+    .then(function(doc) {
+      $scope.bCurso = doc;
     });
 
     $scope.$watch('$viewContentLoaded', function(){

@@ -25,9 +25,9 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap',
-    'indexedDB'
+    'pouchdb'
   ])
-  .config(function ($provide, $routeProvider, $indexedDBProvider) {
+  .config(function ($provide, $routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -44,14 +44,5 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-    $provide.constant('indexedDB', window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB);
     $provide.constant('_', window._);
-    $provide.constant('localStorage', window.localStorage);
-    $provide.constant('Offline', window.Offline);
-    $indexedDBProvider
-      .connection('angaIndexedDB')
-      .upgradeDatabase(2, function(event, db, tx){
-        var objStore = db.createObjectStore('curso', {keyPath: 'id', autoIncrement : true});
-        objStore.createIndex('anio_idx', 'anio', {unique: true});
-      });
   });

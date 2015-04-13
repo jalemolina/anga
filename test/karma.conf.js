@@ -33,7 +33,8 @@ module.exports = function(config) {
       'bower_components/bootstrap-material-design/dist/js/ripples.js',
       'bower_components/lodash/lodash.js',
       'bower_components/offline/offline.min.js',
-      'bower_components/angular-indexed-db/angular-indexed-db.js',
+      'bower_components/pouchdb/dist/pouchdb.js',
+      'bower_components/angular-pouchdb/dist/angular-pouchdb.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js',
       // endbower

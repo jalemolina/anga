@@ -1,9 +1,9 @@
 <a href="" class="btn btn-info btn-fab btn-raised mdi-action-class context-btn" ng-click="showModal()"></a>
-<div class="panel panel-default" ng-repeat="curso in cursos | orderBy:'anio'">
+<div class="panel panel-default" ng-repeat="curso in cursos | orderBy:'doc.anio'">
     <div class="panel-body">
-      <i class="mdi-image-filter-{{curso.anio}} mdi-material-pink numeros"></i>
+      <i class="mdi-image-filter-{{curso.doc.anio}} mdi-material-pink numeros"></i>
         <div class="pull-right">
-          <a href="#/curso/{{curso.anio}}/{{dv}}" class="btn btn-flat btn-primary btn-sm" ng-repeat="(dv, booleano) in curso.divisiones" ng-show="booleano">{{dv}}</a>
+          <a href="#/curso/{{curso.doc.anio}}/{{dv}}" class="btn btn-flat btn-primary btn-sm" ng-repeat="(dv, booleano) in curso.doc.divisiones" ng-show="booleano">{{dv}}</a>
             <a class="btn btn-flat btn-info btn-sm mdi-editor-mode-edit xxs" href=""></a>
             <a class="btn btn-flat btn-danger btn-sm mdi-action-delete xxs" href="" ng-click=showDeleteModal(curso.id)></a>
         </div>
