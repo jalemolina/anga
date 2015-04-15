@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
+  <h4 class="modal-title">Agregar un alumno</h4>
+  <br>
+  </div>
+<div class="modal-body">
+  <form name="alumno">
+    <div class="form-control-wrapper">
+      <input id="nuevoAlumnoApellido" name="nuevoAlumnoForm" class="form-control empty" type="text" ng-model="nuevoAlumno.apellido" required>
+      <div class="floating-label">Apellido/s</div><span class="material-input"></span>
+    </div>
+    <div class="form-control-wrapper">
+      <input id="nuevoAlumnoNombre" name="nuevoAlumnoForm" class="form-control empty" type="text" ng-model="nuevoAlumno.nombre" required>
+      <div class="floating-label">Nombre/s</div><span class="material-input"></span>
+    </div>
+    <div class="form-control-wrapper">
+      <input id="nuevoAlumnoDNI" name="nuevoAlumnoForm" class="form-control empty" type="number" ng-model="nuevoAlumno.dni" required>
+      <div class="floating-label">DNI</div><span class="material-input"></span>
+    </div>
+    <div class="form-control-wrapper">
+      <textarea class="form-control floating-label" placeholder="Observaciones" ng-model="nuevoAlumno.obs"></textarea>
+    </div>
+  </form>
+
+</div>
+<div class="modal-footer">
+  <br>
+  <button class="btn btn-default btn-raised" data-dismiss="modal" ng-click="cancel()">Cancelar</button>
+  <button class="btn btn-primary btn-raised" data-dismiss="modal" ng-class="{ 'disabled' : alumno.$invalid }" ng-click="agregarNuevoAlumno()">Agregar</button>
+</div>

@@ -8,14 +8,45 @@
  * Controller of the angaApp
  */
 angular.module('angaApp')
-  .controller('CursoCtrl', function ($scope, $routeParams, $modal, $db) {
-      //$indexedDB.openStore('curso', function(store) {
-        //store.getAll().then(function(curso) {
-          //$scope.alus = curso;
-        //});
-      //});
+  .controller('CursoCtrl', function ($scope, $routeParams, $modal, $db, $log) {
+    $scope.alus = [];
 
-    console.info($routeParams.anio, $routeParams.div);
+    var refresh = function() {
+      $db.getAlumnosByCurso($routeParams.anio, $routeParams.div)
+      .then(function(doc) {
+        $scope.alus = doc.rows;
+      });
+    };
+    refresh();
+    $scope.$on("REFRESH", refresh);
+
+    $scope.showModalNuevoAlumno = function() {
+      $scope.nuevoAlumno = {};
+      var modalInstance = $modal.open({
+        templateUrl: 'views/nuevo-alumno.html',
+        controller: 'NuevoAlumnoCtrl',
+        resolve: {
+          nuevoAlumno: function() {
+            return $scope.nuevoAlumno;
+          }
+        }
+      });
+
+      modalInstance.result.then(function(selectedItem) {
+        var temp = {apellido: selectedItem.apellido,
+                   nombre: selectedItem.nombre,
+                   dni: selectedItem.dni,
+                   inasistencias: [],
+                   calificaciones: [],
+                   curso: {anio: $routeParams.anio, division: $routeParams.div},
+                   obs: selectedItem.obs
+        };
+
+        $db.insertAlumno(temp);
+        $scope.$broadcast("REFRESH");
+      });
+    };
+
     $scope.cargar = function() {
       console.info('estoy en la funcion cargar');
       //$indexedDB.openStore('alumno', function(store) {
@@ -36,4 +67,21 @@ angular.module('angaApp')
       //});
     };
 
+    $scope.$watch('$viewContentLoaded', function(){
+      $.material.init();
+    });
+  })
+  .controller('NuevoAlumnoCtrl', function ($scope, $modalInstance, nuevoAlumno) {
+    $scope.nuevoAlumno = nuevoAlumno;
+
+    $scope.agregarNuevoAlumno = function() {
+      $modalInstance.close(nuevoAlumno);
+    };
+    $scope.cancel = function() {
+      $modalInstance.dismiss('cancel');
+    };
+
+    $scope.$watch('$viewContentLoaded', function(){
+      $.material.init();
+    });
   });

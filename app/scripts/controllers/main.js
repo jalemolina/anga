@@ -8,14 +8,14 @@
  * Controller of the angaApp
  */
 angular.module('angaApp')
-  .controller('MainCtrl', ['$scope', '$rootScope', '$modal', '$db', '$log',
-    function ($scope, $rootScope, $modal, $db, $log) {
+  .controller('MainCtrl', ['$scope', '$modal', '$db', '$log',
+    function ($scope, $modal, $db, $log) {
         $scope.cursos = [];
 
         var refresh = function() {
           $db.getAllCursos()
-          .then(function(doc) {
-            $scope.cursos = doc;
+          .then(function(docs) {
+            $scope.cursos = docs;
           });
         };
         refresh();

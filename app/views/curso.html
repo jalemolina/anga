@@ -1,3 +1,6 @@
-<button ng-click="cargar()">nuevo</button>
-<p ng-repeat="alumno in alus">{{alumno.apellido}}, {{alumno.nombre}}: {{alumno}}</p>
-{{alus}}
+<a href="" class="btn btn-info btn-fab btn-raised mdi-social-person-add context-btn" ng-click="showModalNuevoAlumno()"></a>
+<p ng-repeat="alumno in alus">{{alumno.doc.apellido}}, {{alumno.doc.nombre}}</p>
+
+<div class="alert alert-danger" ng-show="alus == 0">
+    <strong>No hay alumnos.</strong> Puede agregarlos con el botón <button class="btn btn-fab btn-fab-mini btn-raised btn-sm btn-info" ng-click="showModalNuevoAlumno()"><i class="mdi-social-person-add"></i></button> en la esquina inferior derecha.
+</div>
